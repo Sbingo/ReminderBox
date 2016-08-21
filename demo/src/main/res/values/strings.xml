@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ReminderBox</string>
+    <string name="Snackbar">Snackbar</string>
+    <string name="Dialog">Dialog</string>
+    <string name="Toast">Toast</string>
+    <string name="Notification">Notification</string>
+    <string name="PopupWindow">PopupWindow</string>
+    <string name="Search">Search</string>
+    <string name="share">share</string>
 </resources>
