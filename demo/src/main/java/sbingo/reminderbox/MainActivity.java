@@ -25,7 +25,6 @@ public class MainActivity extends BaseActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setLogo(R.mipmap.ic_launcher);
         actionBar.setTitle("homepage");
-        actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setSubtitle("choose from menu");
 
     }

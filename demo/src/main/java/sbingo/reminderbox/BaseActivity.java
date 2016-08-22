@@ -32,6 +32,7 @@ public class BaseActivity extends AppCompatActivity {
                 finish();
             }
         });
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
     }
 
     @Override
@@ -46,6 +47,12 @@ public class BaseActivity extends AppCompatActivity {
         rootLayout.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
+    /**
+     * simplify  findViewById
+     * @param id
+     * @param <T>
+     * @return
+     */
     protected  <T extends View> T $(int id) {
         try {
             return (T) findViewById(id);

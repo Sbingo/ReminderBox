@@ -31,10 +31,10 @@ public class SnackbarActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.standard:
-                Toast.makeText(this,"standard", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"standard Snackbar", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.custom:
-                Toast.makeText(this,"custom", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"custom Snackbar", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

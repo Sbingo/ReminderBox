@@ -7,15 +7,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by Sbingo on 2016/8/22.
  */
-public class DialogActivity extends BaseActivity implements View.OnClickListener {
+public class DialogActivity extends BaseActivity {
+
+
+    @BindView(R.id.standard)
+    TextView standard;
+    @BindView(R.id.custom)
+    TextView custom;
 
     private ActionBar actionBar;
-    private TextView standard;
-    private TextView custom;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +32,19 @@ public class DialogActivity extends BaseActivity implements View.OnClickListener
         actionBar.setCustomView(getLayoutInflater().inflate(R.layout.activity_dialog_toolbar, null),
                 new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         actionBar.setDisplayHomeAsUpEnabled(true);
-        initView();
+
+        ButterKnife.bind(this);
     }
 
-    private void initView() {
-        standard =$(R.id.standard);
-        custom = $(R.id.custom);
-
-        standard.setOnClickListener(this);
-        custom.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    @OnClick({R.id.standard, R.id.custom})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.standard:
-                Toast.makeText(this,"standard", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "standard dialog", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.custom:
-                Toast.makeText(this,"custom", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "custom dialog", Toast.LENGTH_SHORT).show();
                 break;
-            default:
         }
     }
 }
