@@ -48,12 +48,13 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * simplify  findViewById
+     * Simpler version of {@link View#findViewById(int)}
+     *
      * @param id
      * @param <T>
      * @return
      */
-    protected  <T extends View> T $(int id) {
+    protected <T extends View> T $(int id) {
         try {
             return (T) findViewById(id);
         } catch (Exception e) {
