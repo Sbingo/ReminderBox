@@ -1,9 +1,12 @@
 package sbingo.reminderbox;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +23,7 @@ public class SnackbarActivity extends BaseActivity {
     TextView tvContent;
 
     private ActionBar actionBar;
-
+    Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,10 @@ public class SnackbarActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.standard:
-                CustomSnackbar.Build(tvContent, "不小心点错了？").show();
+                CustomSnackbar.getInstance(createSnackbar(tvContent, "不小心点错了？", "取消"))
+                        .setBackgroundColor(Color.BLUE)
+                        .addView(R.layout.activity_main,0)
+                        .show();
                 return true;
             case R.id.custom:
                 Toast.makeText(this, "custom Snackbar", Toast.LENGTH_SHORT).show();
@@ -53,5 +59,16 @@ public class SnackbarActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    Snackbar createSnackbar(View v, String msg, String action) {
+       return snackbar = Snackbar
+                .make(v, msg, Snackbar.LENGTH_LONG)
+                .setAction(action, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                    }
+                });
     }
 }
