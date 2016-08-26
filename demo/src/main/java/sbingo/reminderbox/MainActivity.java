@@ -74,7 +74,8 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.Toast), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.Pop:
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.PopupWindow), Toast.LENGTH_SHORT).show();
+                intent = new Intent(MainActivity.this, PopupWindowActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
