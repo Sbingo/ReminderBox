@@ -1,65 +1,124 @@
 package PopupWindow;
 
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.PopupWindow;
+
+import sbingo.remiderbox.R;
 
 /**
  * Created by Sbingo on 2016/8/26.
  * todo
  */
-public class CustomPopupWindow extends PopupWindow {
+public class CustomPopupWindow {
 
-    private static CustomPopupWindow customPopupWindow;
-    private boolean hasCreated;
+    public static PopupWindow popupWindow;
+    private DismissCallBack dismissCallBack;
+    private FrameLayout frameLayout;
+    private int gravity;
+    private int screenWidth;
+    private int screenHight;
 
-    public static CustomPopupWindow getInstance() {
-        if (customPopupWindow == null) {
-            customPopupWindow = new CustomPopupWindow();
-        }
-        return customPopupWindow;
+    public CustomPopupWindow(Context context) {
+        popupWindow = new PopupWindow();
+        frameLayout = new FrameLayout(context);
+        frameLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.popupBackground));
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+        screenHight = context.getResources().getDisplayMetrics().heightPixels;
+        gravity = Gravity.CENTER;
     }
 
     private void createPopupWindow(View popupView, int width, int height, int animationStyle) {
-        if (hasCreated) {
-            return;
-        }
-        customPopupWindow = (CustomPopupWindow) new PopupWindow(popupView, width, height, true);
-        // 使其聚集
-        customPopupWindow.setTouchable(true);
-        // 设置允许在外点击消失
-        customPopupWindow.setOutsideTouchable(true);
-        customPopupWindow.setOnDismissListener(new OnDismissListener() {
+        popupWindow = new PopupWindow(popupView, width, height, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-//                if (dimissCallBack != null)
-//                    dimissCallBack.dimissCallBack();
+                if (dismissCallBack != null)
+                    dismissCallBack.dismissCallBack();
             }
         });
-        // 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
-        customPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-        customPopupWindow.setAnimationStyle(animationStyle);
-        hasCreated = true;
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setAnimationStyle(animationStyle);
     }
 
-    public void showOnBottom(View parentView, View contentView, int width, int height, int xoff, int yoff) {
-        createPopupWindow(contentView, width, height, -1);
-        customPopupWindow.showAsDropDown(parentView, xoff, yoff);
+    public interface DismissCallBack {
+        void dismissCallBack();
     }
 
-    public void showOnTop() {
-
+    public void setListener(DismissCallBack listener) {
+        this.dismissCallBack = listener;
     }
 
-    public void showOnLeft() {
-
+    public void setGravity(int gravity) {
+        this.gravity = gravity;
     }
 
-    public void showOnRight() {
-
+    public void showOnBottom(View parentView, View contentView, int style, int width, int height, int xOff, int yOff) {
+        frameLayout.removeAllViews();
+        frameLayout.addView(contentView,new ViewGroup.LayoutParams(width, height));
+        ((FrameLayout.LayoutParams)contentView.getLayoutParams()).gravity = gravity;
+        createPopupWindow(frameLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, style);
+        popupWindow.showAsDropDown(parentView, xOff, yOff);
     }
 
-    public void show() {
-
+    public void showOnTop(View parentView, View contentView, int style, int width, int height, int xOff, int yOff) {
+        frameLayout.removeAllViews();
+        frameLayout.addView(contentView,new ViewGroup.LayoutParams(width, height));
+        ((FrameLayout.LayoutParams)contentView.getLayoutParams()).gravity = gravity;
+        createPopupWindow(frameLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, style);
+        int[] location = new int[2];
+        parentView.getLocationOnScreen(location);
+        popupWindow.showAtLocation(parentView, Gravity.NO_GRAVITY, location[0] + xOff, location[1] + yOff - contentView.getMeasuredHeight());
     }
+
+    public void showOnLeft(View parentView, View contentView, int style, int width, int height, int xOff, int yOff) {
+        frameLayout.removeAllViews();
+        frameLayout.addView(contentView,new ViewGroup.LayoutParams(width, height));
+        ((FrameLayout.LayoutParams)contentView.getLayoutParams()).gravity = gravity;
+        createPopupWindow(frameLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, style);
+        int[] location = new int[2];
+        parentView.getLocationOnScreen(location);
+        popupWindow.showAtLocation(parentView, Gravity.NO_GRAVITY, location[0] - contentView.getMeasuredWidth() + xOff, yOff);
+    }
+
+    public void showOnRight(View parentView, View contentView, int style, int width, int height, int xOff, int yOff) {
+        frameLayout.removeAllViews();
+        frameLayout.addView(contentView,new ViewGroup.LayoutParams(width, height));
+        ((FrameLayout.LayoutParams)contentView.getLayoutParams()).gravity = Gravity.BOTTOM;
+        createPopupWindow(frameLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, style);
+        int[] location = new int[2];
+        parentView.getLocationOnScreen(location);
+        popupWindow.showAtLocation(parentView, Gravity.NO_GRAVITY, location[0] + parentView.getMeasuredWidth(), yOff);
+    }
+
+    public void showOnScreenBottom(View parentView, View contentView, int style, int width, int height, int xOff, int yOff) {
+        frameLayout.removeAllViews();
+        frameLayout.addView(contentView,new ViewGroup.LayoutParams(width, height));
+        ((FrameLayout.LayoutParams)contentView.getLayoutParams()).gravity = Gravity.BOTTOM;
+        createPopupWindow(frameLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, style);
+        popupWindow.showAtLocation(parentView, Gravity.BOTTOM, xOff, yOff);
+    }
+
+    public void showFullScreen(View parentView, View contentView, int style, int width, int height, int xOff, int yOff) {
+        frameLayout.removeAllViews();
+        frameLayout.addView(contentView,new ViewGroup.LayoutParams(width, height));
+        ((FrameLayout.LayoutParams)contentView.getLayoutParams()).gravity = Gravity.CENTER;
+        createPopupWindow(frameLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, style);
+        popupWindow.showAtLocation(parentView, Gravity.CENTER, xOff, yOff);
+    }
+
+
 }
