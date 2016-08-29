@@ -29,20 +29,30 @@ public class PopupWindowActivity extends BaseActivity {
         actionBar.setTitle("PopupWindow");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        /**
+         * step1
+         * create an instance of {@link CustomPopupWindow}.
+         */
         customPopupWindow = new CustomPopupWindow(PopupWindowActivity.this);
         /** This is optional */
-        customPopupWindow.setListener(new CustomPopupWindow.DismissCallBack() {
+        customPopupWindow.setDismissListener(new CustomPopupWindow.DismissCallBack() {
             @Override
             public void dismissCallBack() {
                 Toast.makeText(PopupWindowActivity.this, "popup dismiss", Toast.LENGTH_SHORT).show();
             }
         });
 
-        /** create the view to popup yourself */
+        /**
+         * step2
+         * create a arbitrary view to popup yourself.
+         */
         popupTestView = new PopupTestView(PopupWindowActivity.this);
-        popupTestView.setListener(new PopupTestView.PopListener() {
+        popupTestView.setPopListener(new PopupTestView.PopListener() {
             @Override
             public void close() {
+                /** if you want to dismiss the popupWindow in your view,
+                 * do it like this.
+                 */
                 if (CustomPopupWindow.popupWindow != null) {
                     CustomPopupWindow.popupWindow.dismiss();
                 }
@@ -50,30 +60,40 @@ public class PopupWindowActivity extends BaseActivity {
         });
     }
 
+    /**
+     * step3
+     * choose one way to show the popupWindow as follows.
+     */
+
     public void showRight(View v) {
-        customPopupWindow.showOnRight(v, popupTestView, -1, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 0, 0);
+        /** {@link CustomPopupWindow#setGravity(int)} is optional */
+        customPopupWindow.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
+        customPopupWindow.showOnRight(v, popupTestView, -1, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, -50, -100);
     }
 
     public void showLeft(View v) {
-        customPopupWindow.showOnLeft(v, popupTestView, -1, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 0, 0);
+        customPopupWindow.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+        customPopupWindow.showOnLeft(v, popupTestView, -1, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 50, -150);
     }
 
     public void showTop(View v) {
-        customPopupWindow.showOnTop(v, popupTestView, 0, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
+        customPopupWindow.setGravity(Gravity.BOTTOM);
+        customPopupWindow.showOnTop(v, popupTestView, 0, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, -10);
     }
 
     public void showBottom(View v) {
-        /** {@link CustomPopupWindow#setGravity(int)} is optional */
-        customPopupWindow.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
-        customPopupWindow.showOnBottom(v, popupTestView, 0, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
+        customPopupWindow.setGravity(Gravity.TOP);
+        customPopupWindow.showOnBottom(v, popupTestView, 0, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, 100);
     }
 
     public void showFullScreen(View v) {
-        customPopupWindow.showFullScreen(v, popupTestView, R.style.pop_fullscreen_style, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0, 0);
+        customPopupWindow.setGravity(Gravity.RIGHT | Gravity.TOP);
+        customPopupWindow.showFullScreen(v, popupTestView, R.style.pop_fullscreen_style, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, -100, 300);
     }
 
     public void showScreenBottom(View v) {
-        customPopupWindow.showOnScreenBottom(v, popupTestView, R.style.pop_bottom_style, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
+        customPopupWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
+        customPopupWindow.showOnScreenBottom(v, popupTestView, R.style.pop_bottom_style, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 100, -10);
     }
 
 }

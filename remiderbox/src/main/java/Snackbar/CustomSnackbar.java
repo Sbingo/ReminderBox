@@ -31,8 +31,12 @@ public class CustomSnackbar {
      * @return
      */
     public static CustomSnackbar getInstance(@NonNull Snackbar snackbar) {
-        if (customSnackbar == null) {
-            customSnackbar = new CustomSnackbar();
+        if (null == customSnackbar) {
+            synchronized (CustomSnackbar.class) {
+                if (null == customSnackbar) {
+                    customSnackbar = new CustomSnackbar();
+                }
+            }
         }
         CustomSnackbar.snackbar = snackbar;
         return customSnackbar;

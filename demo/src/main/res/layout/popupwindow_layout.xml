@@ -27,18 +27,18 @@
             android:layout_above="@id/btn_1"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
-            android:onClick="showTop"
+            android:onClick="showBottom"
             android:padding="10dp"
-            android:text="show top"/>
+            android:text="show bottom"/>
 
     <Button android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btn_1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:onClick="showBottom"
+            android:onClick="showTop"
             android:padding="10dp"
-            android:text="show bottom"/>
+            android:text="show top"/>
 
     <Button android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,6 +53,6 @@
             android:layout_marginTop="20dp"
             android:onClick="showScreenBottom"
             android:padding="10dp"
-            android:text="show\nScreenBottom"/>
+            android:text="show\nScreen Bottom"/>
 
 </RelativeLayout>

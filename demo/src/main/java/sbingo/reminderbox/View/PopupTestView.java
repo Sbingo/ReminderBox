@@ -50,7 +50,7 @@ public class PopupTestView extends LinearLayout {
         void close();
     }
 
-    public void setListener(PopListener listener) {
+    public void setPopListener(PopListener listener) {
         this.listener = listener;
     }
 }
