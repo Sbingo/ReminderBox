@@ -245,6 +245,7 @@ public class CustomPopupWindow {
             lp.topMargin = yOff;
         }
         contentView.setLayoutParams(lp);
+        contentView.setOnClickListener(null);
     }
 
     private void createPopupWindow(View popupView, int width, int height, int animationStyle) {
