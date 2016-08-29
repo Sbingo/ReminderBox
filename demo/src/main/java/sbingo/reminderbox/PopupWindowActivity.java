@@ -38,7 +38,7 @@ public class PopupWindowActivity extends BaseActivity {
         customPopupWindow.setDismissListener(new CustomPopupWindow.DismissCallBack() {
             @Override
             public void dismissCallBack() {
-                Toast.makeText(PopupWindowActivity.this, "popup dismiss", Toast.LENGTH_SHORT).show();
+                /** do sth you like here */
             }
         });
 
@@ -78,7 +78,7 @@ public class PopupWindowActivity extends BaseActivity {
 
     public void showTop(View v) {
         customPopupWindow.setGravity(Gravity.BOTTOM);
-        customPopupWindow.showOnTop(v, popupTestView, 0, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, -10);
+        customPopupWindow.showOnTop(v, popupTestView, 0, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, -50);
     }
 
     public void showBottom(View v) {
@@ -92,8 +92,7 @@ public class PopupWindowActivity extends BaseActivity {
     }
 
     public void showScreenBottom(View v) {
-        customPopupWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
-        customPopupWindow.showOnScreenBottom(v, popupTestView, R.style.pop_bottom_style, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 100, -10);
+        customPopupWindow.showOnScreenBottom(v, popupTestView, R.style.pop_bottom_style, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0, 0);
     }
 
 }

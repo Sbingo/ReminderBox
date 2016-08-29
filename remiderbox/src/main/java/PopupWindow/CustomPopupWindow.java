@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,6 +192,7 @@ public class CustomPopupWindow {
     public void showOnScreenBottom(View parentView, View contentView, int style, int width, int height,int xOff, int yOff) {
         frameLayout.removeAllViews();
         frameLayout.addView(contentView, new ViewGroup.LayoutParams(width, height));
+        setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);
         setContentViewLayoutParams(contentView, xOff, yOff);
         createPopupWindow(frameLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, style);
         popupWindow.showAtLocation(parentView, Gravity.NO_GRAVITY, 0, 0);
