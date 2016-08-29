@@ -8,5 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
 
+    <style name="pop_bottom_style" >
+        <item name="android:windowEnterAnimation">@anim/pop_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_bottom_out</item>
+    </style>
+
+    <style name="pop_fullscreen_style">
+        <item name="android:windowEnterAnimation">@anim/pop_fullscreen_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_fullscreen_out</item>
+    </style>
 </resources>

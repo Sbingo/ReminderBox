@@ -7,25 +7,30 @@
     <item
         android:id="@+id/Snackbar"
         android:title="@string/Snackbar"
+        android:orderInCategory="3"
         app:showAsAction="never" />
     <item
         android:id="@+id/Dialog"
         android:title="@string/Dialog"
+        android:orderInCategory="1"
         app:showAsAction="never" />
     <item
         android:id="@+id/Toast"
         android:title="@string/Toast"
+        android:orderInCategory="4"
         app:showAsAction="never" />
     <item
         android:id="@+id/Pop"
         android:title="@string/PopupWindow"
+        android:orderInCategory="2"
         app:showAsAction="never" />
     <item
         android:id="@+id/Notification"
         android:title="@string/Notification"
+        android:orderInCategory="5"
         app:showAsAction="never" />
     <item android:id="@+id/action_search_show"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/search_white"
         android:title="@string/Search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView" />

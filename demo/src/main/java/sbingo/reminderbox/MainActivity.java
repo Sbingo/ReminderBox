@@ -3,25 +3,30 @@ package sbingo.reminderbox;
 import android.content.Intent;
 import android.database.sqlite.SQLiteBlobTooBigException;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private Toolbar toolbar;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("首页");
-        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setLogo(R.mipmap.ic_launcher);
+        actionBar.setTitle("homepage");
+        actionBar.setSubtitle("choose from menu");
+
     }
 
     @Override
@@ -29,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search_show);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setQueryHint("请输入想搜索的代码");
+        searchView.setQueryHint("type whatever you want");
 
         MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
             @Override
@@ -52,23 +57,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.Snackbar:
-//                Toast.makeText(MainActivity.this, getResources().getString(R.string.Snackbar), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, SnackbarActivity.class);
+                intent = new Intent(MainActivity.this, SnackbarActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.Dialog:
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.Dialog), Toast.LENGTH_LONG).show();
+                intent = new Intent(MainActivity.this, DialogActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.Notification:
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.Notification), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.Notification), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.Toast:
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.Toast), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.Toast), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.Pop:
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.PopupWindow), Toast.LENGTH_LONG).show();
+                intent = new Intent(MainActivity.this, PopupWindowActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
