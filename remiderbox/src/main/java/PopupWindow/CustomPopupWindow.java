@@ -16,9 +16,9 @@ import sbingo.remiderbox.R;
  * Created by Sbingo on 2016/8/26.
  * There are 6 ways here to show the popupWidow, just choose the one you need.
  * Notice: The contentView to popup here will automatically has a parent view
- * with dark background, and the contentView's default gravity is {@link Gravity#CENTER}
- * you could change the gravity by {@link this#setGravity(int)} before any 'show' method
- * be called every time.
+ * with dark background, and the contentView's default gravity is {@link Gravity#CENTER}.
+ * You could change the gravity by calling {@link this#setGravity(int)} before
+ * any {@code show()} methods) be called every time.
  */
 public class CustomPopupWindow {
 
