@@ -19,4 +19,8 @@
         <item name="android:windowEnterAnimation">@anim/pop_fullscreen_in</item>
         <item name="android:windowExitAnimation">@anim/pop_fullscreen_out</item>
     </style>
+
+    <!--could only be used in Activity that not extend "AppCompatActivity"-->
+    <style name="AnotherBaseTheme" parent="@android:style/Theme.Light.NoTitleBar"/>
+
 </resources>
