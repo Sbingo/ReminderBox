@@ -34,7 +34,7 @@ public class CustomPopupWindow {
     public CustomPopupWindow(Context context) {
         popupWindow = new PopupWindow();
         frameLayout = new FrameLayout(context);
-        frameLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.popupBackground));
+        frameLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.defaultBackground));
         frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
