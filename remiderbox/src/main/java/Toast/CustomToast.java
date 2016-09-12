@@ -57,7 +57,7 @@ public class CustomToast {
     /**
      * use your own layout
      * Notice:{@code setToastId(toastId)} must be called after call this.
-     * @param layoutResource
+     * @param layoutResource the layout resource id
      * @return
      */
     public CustomToast setLayoutResource(int layoutResource) {
@@ -69,11 +69,21 @@ public class CustomToast {
     /**
      * set the toast id
      * should only be called after call the {@code setLayoutResource(layoutResource}.
-     * @param toastId
+     * @param toastId usually the TextView's id of toast
      * @return
      */
     public CustomToast setToastId(int toastId) {
         this.toastId = toastId;
+        return this;
+    }
+
+    /**
+     * set the duration of the toast
+     * @param duration {@link Toast#LENGTH_LONG}.{@link Toast#LENGTH_SHORT}
+     * @return
+     */
+    public CustomToast setDuration(int duration) {
+        this.duration = duration;
         return this;
     }
 
