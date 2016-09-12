@@ -2,6 +2,7 @@ package Toast;
 
 import android.content.Context;
 import android.support.annotation.IdRes;
+import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
@@ -78,13 +79,18 @@ public class CustomToast {
     }
 
     /**
-     * set the duration of the toast
-     * @param duration {@link Toast#LENGTH_LONG}.{@link Toast#LENGTH_SHORT}
+     * Set how long to show the view for.
+     * @param duration
      * @return
      */
-    public CustomToast setDuration(int duration) {
+    public CustomToast setDuration(@Duration int duration) {
         this.duration = duration;
         return this;
+    }
+
+    @IntDef({Toast.LENGTH_SHORT, Toast.LENGTH_LONG})
+    public @interface Duration{
+
     }
 
 }

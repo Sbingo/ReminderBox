@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import Toast.CustomToast;
 
@@ -36,7 +37,7 @@ public class ToastActivity extends BaseActivity {
                 new CustomToast(ToastActivity.this).makeText("I am normal").show();
                 return true;
             case R.id.custom:
-                new CustomToast(ToastActivity.this).setLayoutResource(R.layout.custom_toast).setToastId(R.id.custom_toast).makeText("custom i am").show();
+                new CustomToast(ToastActivity.this).setLayoutResource(R.layout.custom_toast).setToastId(R.id.custom_toast).makeText("custom i am").setDuration(Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
