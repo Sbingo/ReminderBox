@@ -1,12 +1,9 @@
 package Toast;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -17,45 +14,67 @@ import sbingo.remiderbox.R;
 /**
  * Created by Sbingo on 2016/9/10.
  */
-public class CustomToast extends Toast {
+public class CustomToast {
 
-    private static CustomToast customToast;
+    private static Toast customToast;
     private int duration = Toast.LENGTH_SHORT;
+    private Context context;
+    @LayoutRes
+    private int layoutResource = R.layout.default_custom_toast;
+    @IdRes
+    private int toastId = R.id.toast;
 
-    /**
-     * Construct an empty Toast object.  You must call {@link #setView} before you
-     * can call {@link #show}.
-     *
-     * @param context The context to use.  Usually your {@link Application}
-     *                or {@link Activity} object.
-     */
     public CustomToast(Context context) {
-        super(context);
-    }
-
-
-    public CustomToast makeText(Context context, @StringRes int resId) {
-        return makeText(context, context.getResources().getText(resId));
-    }
-
-    public CustomToast makeText(Context context, CharSequence text) {
-        if (customToast != null) {
+        if (null != customToast) {
             customToast.cancel();
-        } else {
-            customToast = new CustomToast(context);
         }
-        View layout = LayoutInflater.from(context).inflate(R.layout.default_custom_toast, null);
-        TextView content = (TextView) layout.findViewById(R.id.toast);
+        customToast = new Toast(context);
+        this.context = context;
+    }
+
+    public CustomToast makeText(@StringRes int resId) {
+        return makeText(context.getResources().getText(resId));
+    }
+
+    public CustomToast makeText(CharSequence text) {
+        View layout = LayoutInflater.from(context).inflate(layoutResource, null);
+        TextView content = null;
+        if (toastId != 0) {
+            content = (TextView) layout.findViewById(toastId);
+        } else {
+            throw new RuntimeException("toastId must have been set");
+        }
         content.setText(text);
         customToast.setView(layout);
         customToast.setDuration(duration);
-        customToast.show();
-        return customToast;
+        return this;
     }
 
+    public void show() {
+        customToast.show();
+    }
 
-    public void setLayout(int layout) {
+    /**
+     * use your own layout
+     * Notice:{@code setToastId(toastId)} must be called after call this.
+     * @param layoutResource
+     * @return
+     */
+    public CustomToast setLayoutResource(int layoutResource) {
+        this.layoutResource = layoutResource;
+        toastId = 0;
+        return this;
+    }
 
+    /**
+     * set the toast id
+     * should only be called after call the {@code setLayoutResource(layoutResource}.
+     * @param toastId
+     * @return
+     */
+    public CustomToast setToastId(int toastId) {
+        this.toastId = toastId;
+        return this;
     }
 
 }

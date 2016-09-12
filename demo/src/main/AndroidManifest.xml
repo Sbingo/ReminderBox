@@ -22,6 +22,8 @@
 
         <activity android:name=".PopupWindowActivity"/>
 
+        <activity android:name=".ToastActivity"/>
+
     </application>
 
 </manifest>
